@@ -1,7 +1,15 @@
+[![PHP 5.5+][ico-engine]][lang]
+[![MIT Licensed][ico-license]][license]
+[ico-engine]: http://img.shields.io/badge/php-5.5+-8892BF.svg
+[lang]: http://php.net
+[ico-license]: http://img.shields.io/packagist/l/adlawson/veval.svg
+[license]: LICENSE
+
 zf-maintenance-mode
 ===================
 
 This ZF2 "maintenance mode" module allows you to stall your application to maintenance (503) via CLI.
+It's heavily inspired from the [apigility development mode module] (https://github.com/zfcampus/zf-development-mode)
 
 Requirements
 ============
@@ -18,22 +26,22 @@ composer require mpalourdio/zf2-maintenance-mode
 
 Add "ZfMaintenanceMode" to your **modules list** in **application.config.php**
 
-Eventually, ```cp maintenance.config.global.php.dist config/autoload/maintenance.config.global.php```
+Eventually, copy ``` maintenance.config.global.php.dist``` to ````config/autoload/maintenance.config.global.php``` to personalize the message.
 
-To enable maintenance mode
+Enable maintenance mode
 ==========================
 
 ```sh
-cd path/to/install
+cd path/to/project/root
 php public/index.php maintenance enable
 ```
 
-Note: clear your configuration if needed.
+Note: clear your cached configuration if needed.
 
-To disable maintenance mode
+Disable maintenance mode
 ===========================
 
 ```sh
-cd path/to/install
+cd path/to/project/root
 php public/index.php maintenance disable
 ```
