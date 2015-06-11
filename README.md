@@ -8,7 +8,7 @@
 zf2 maintenance mode
 ====================
 
-This ZF2 "maintenance mode" module allows you to stall your application to maintenance (503) via CLI.
+This ZF2 "maintenance mode" module allows you to stall your application to maintenance (503 by default) via CLI.
 It's heavily inspired from the [apigility development mode module] (https://github.com/zfcampus/zf-development-mode)
 
 Requirements
@@ -26,7 +26,7 @@ composer require mpalourdio/zf2-maintenance-mode
 
 Add "ZfMaintenanceMode" to your **modules list** in **application.config.php**
 
-Eventually, copy ``` maintenance.config.global.php.dist``` to ````config/autoload/maintenance.config.global.php``` to personalize the message.
+Eventually, copy ``` maintenance.config.global.php.dist``` to ````config/autoload/maintenance.config.global.php``` to personalize the message and/or the http status code.
 
 Enable maintenance mode
 ==========================
