@@ -59,7 +59,6 @@ class MaintenanceModeController extends AbstractActionController
      */
     public function disableAction()
     {
-        var_dump(realpath(dirname('.')));
         if (! file_exists('config/maintenance.flag')) {
             return "Maintenance mode was already disabled.\n";
         }
