@@ -5,8 +5,8 @@
 [ico-license]: http://img.shields.io/packagist/l/adlawson/veval.svg
 [license]: LICENSE
 
-zf-maintenance-mode
-===================
+zf2 maintenance mode
+====================
 
 This ZF2 "maintenance mode" module allows you to stall your application to maintenance (503) via CLI.
 It's heavily inspired from the [apigility development mode module] (https://github.com/zfcampus/zf-development-mode)
