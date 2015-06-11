@@ -10,7 +10,6 @@
 
 namespace ZfMaintenanceMode;
 
-use Zend\Http\PhpEnvironment\Response;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\InitProviderInterface;
 use Zend\ModuleManager\ModuleEvent;
@@ -46,7 +45,7 @@ class Module implements InitProviderInterface, ConfigProviderInterface
                 MvcEvent::EVENT_BOOTSTRAP,
                 function (MvcEvent $mvcEvent) {
                     $response = $mvcEvent->getResponse();
-                    $response->setStatusCode(Response::STATUS_CODE_503);
+                    $response->setStatusCode($this->getUserConfig()['maintenance']['status_code']);
                     $response->setContent('<h1>' . $this->getUserConfig()['maintenance']['message'] . '</h1>');
                     $mvcEvent->stopPropagation(true);
                 },

@@ -10,6 +10,7 @@
 
 return [
     'maintenance' => [
-        'message' => 'Service unavailable',
+        'message'     => 'Service unavailable',
+        'status_code' => 503,
     ],
 ];
