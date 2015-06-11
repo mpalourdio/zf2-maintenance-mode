@@ -60,7 +60,7 @@ class Module implements InitProviderInterface, ConfigProviderInterface
      */
     public function getConfig()
     {
-        return require __DIR__ . '/config/module.config.php';
+        return require __DIR__ . '/../config/module.config.php';
     }
 
     /**
@@ -75,7 +75,7 @@ class Module implements InitProviderInterface, ConfigProviderInterface
             return require $globPaths[$globCounter - 1];
         }
 
-        return require __DIR__ . '/config/maintenance.config.global.php.dist';
+        return require __DIR__ . '/../config/maintenance.config.global.php.dist';
     }
 
     /**
