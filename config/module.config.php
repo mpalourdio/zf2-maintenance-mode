@@ -9,11 +9,12 @@
  */
 
 use ZfMaintenanceMode\Controller\MaintenanceModeController;
+use ZfMaintenanceMode\Controller\MaintenanceModeControllerFactory;
 
 return [
     'controllers' => [
-        'invokables' => [
-            MaintenanceModeController::class => MaintenanceModeController::class,
+        'factories' => [
+            MaintenanceModeController::class => MaintenanceModeControllerFactory::class,
         ],
     ],
     'console'     => [

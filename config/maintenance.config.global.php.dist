@@ -8,9 +8,12 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+use Zend\Http\Response;
+
 return [
     'maintenance' => [
         'message'     => 'Service unavailable',
-        'status_code' => 503,
+        'status_code' => Response::STATUS_CODE_503,
+        'flag_file'   => 'config/maintenance.flag',
     ],
 ];

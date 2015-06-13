@@ -13,9 +13,20 @@ namespace ZfMaintenanceMode\Controller;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\MvcEvent;
 
 class MaintenanceModeController extends AbstractActionController
 {
+    private $flagFilePath;
+
+    /**
+     * @param string $flagFilePath
+     */
+    public function __construct($flagFilePath)
+    {
+        $this->flagFilePath = $flagFilePath;
+    }
+
     /**
      * @param  EventManagerInterface $events
      * @return self
@@ -24,7 +35,7 @@ class MaintenanceModeController extends AbstractActionController
     {
         parent::setEventManager($events);
         $events->attach(
-            'dispatch',
+            MvcEvent::EVENT_DISPATCH,
             function ($e) {
                 $request = $e->getRequest();
                 if (! $request instanceof ConsoleRequest) {
@@ -45,11 +56,11 @@ class MaintenanceModeController extends AbstractActionController
      */
     public function enableAction()
     {
-        if (file_exists('config/maintenance.flag')) {
+        if (file_exists($this->flagFilePath)) {
             return "Already in maintenance mode!\n";
         }
 
-        touch('config/maintenance.flag');
+        touch($this->flagFilePath);
 
         return "You are now in maintenance mode.\n";
     }
@@ -59,11 +70,11 @@ class MaintenanceModeController extends AbstractActionController
      */
     public function disableAction()
     {
-        if (! file_exists('config/maintenance.flag')) {
+        if (! file_exists($this->flagFilePath)) {
             return "Maintenance mode was already disabled.\n";
         }
 
-        unlink('config/maintenance.flag');
+        unlink($this->flagFilePath);
 
         return "Maintenance mode is now disabled.\n";
     }

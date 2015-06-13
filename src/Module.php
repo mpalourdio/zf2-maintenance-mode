@@ -21,7 +21,8 @@ use Zend\Console\Adapter\AdapterInterface as Console;
 class Module implements InitProviderInterface, ConfigProviderInterface
 {
     /**
-     * @param ModuleManagerInterface $moduleManager
+     * @param  ModuleManagerInterface $moduleManager
+     * @throws \Exception
      */
     public function init(ModuleManagerInterface $moduleManager)
     {
@@ -30,8 +31,23 @@ class Module implements InitProviderInterface, ConfigProviderInterface
         }
 
         $rootApplicationPath = realpath(dirname('.'));
+        $userConfig          = $this->getUserConfig();
 
-        if (file_exists($rootApplicationPath . '/config/maintenance.flag')) {
+        if (! isset($userConfig['maintenance']['flag_file'])) {
+            throw new \Exception(
+                'The \'flag_file\' parameter is missing in config/autoload/config/autoload/maintenance{,*.}{global,local}.php'
+            );
+        }
+
+        if (file_exists($rootApplicationPath . DIRECTORY_SEPARATOR . $userConfig['maintenance']['flag_file'])) {
+            if (! isset($userConfig['maintenance']['status_code']) ||
+                ! isset($userConfig['maintenance']['message'])
+            ) {
+                throw new \Exception(
+                    'Please fill all the parameters in config/autoload/config/autoload/maintenance{,*.}{global,local}.php'
+                );
+            }
+
             $moduleManager->getEventManager()->attach(
                 ModuleEvent::EVENT_MERGE_CONFIG,
                 function (ModuleEvent $moduleEvent) {
@@ -43,10 +59,10 @@ class Module implements InitProviderInterface, ConfigProviderInterface
             $moduleManager->getEventManager()->getSharedManager()->attach(
                 Application::class,
                 MvcEvent::EVENT_BOOTSTRAP,
-                function (MvcEvent $mvcEvent) {
+                function (MvcEvent $mvcEvent) use ($userConfig) {
                     $response = $mvcEvent->getResponse();
-                    $response->setStatusCode($this->getUserConfig()['maintenance']['status_code']);
-                    $response->setContent('<h1>' . $this->getUserConfig()['maintenance']['message'] . '</h1>');
+                    $response->setStatusCode($userConfig['maintenance']['status_code']);
+                    $response->setContent('<h1>' . $userConfig['maintenance']['message'] . '</h1>');
                     $mvcEvent->stopPropagation(true);
                 },
                 9999999
@@ -80,7 +96,7 @@ class Module implements InitProviderInterface, ConfigProviderInterface
     /**
      * Return the console usage for this module
      *
-     * @param Console $console
+     * @param  Console $console
      * @return array
      */
     public function getConsoleUsage(Console $console)
