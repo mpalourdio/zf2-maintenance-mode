@@ -11,7 +11,7 @@ zf2 maintenance mode
 This ZF2 "maintenance mode" module allows you to stall your application to maintenance (503 by default) via CLI.
 It's heavily inspired from the [apigility development mode module] (https://github.com/zfcampus/zf-development-mode).
 
-It mainly short-circuits the module manager during configuration merging and the framework bootstrapping to prevent any service to load, like db connections for example. 
+It mainly short-circuits the module manager during modules initialization and short-circuits the framework bootstrapping to prevent any service to load, like db connections for example. 
 
 Requirements
 ============

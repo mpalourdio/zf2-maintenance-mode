@@ -49,7 +49,7 @@ class Module implements InitProviderInterface, ConfigProviderInterface
             }
 
             $moduleManager->getEventManager()->attach(
-                ModuleEvent::EVENT_MERGE_CONFIG,
+                ModuleEvent::EVENT_LOAD_MODULE,
                 function (ModuleEvent $moduleEvent) {
                     $moduleEvent->stopPropagation(true);
                 },
