@@ -53,7 +53,7 @@ class Module implements InitProviderInterface, ConfigProviderInterface
                 function (ModuleEvent $moduleEvent) {
                     $moduleEvent->stopPropagation(true);
                 },
-                9999999
+                PHP_INT_MAX
             );
 
             $moduleManager->getEventManager()->getSharedManager()->attach(
@@ -65,7 +65,7 @@ class Module implements InitProviderInterface, ConfigProviderInterface
                     $response->setContent('<h1>' . $userConfig['maintenance']['message'] . '</h1>');
                     $mvcEvent->stopPropagation(true);
                 },
-                9999999
+                PHP_INT_MAX
             );
         }
     }
