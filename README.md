@@ -30,6 +30,8 @@ Add "ZfMaintenanceMode" to your **modules list** in **application.config.php**
 
 Eventually, copy ``` maintenance.config.global.php.dist``` to ````config/autoload/maintenance.config.global.php``` to personalize the message and/or the http status code and/or the path of the flag file.
 
+When there is a 'custom_file' config, the file will be displayed instead of the message.
+
 Enable maintenance mode
 ==========================
 
