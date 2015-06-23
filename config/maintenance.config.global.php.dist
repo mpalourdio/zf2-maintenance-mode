@@ -15,5 +15,6 @@ return [
         'message'     => 'Service unavailable',
         'status_code' => Response::STATUS_CODE_503,
         'flag_file'   => 'config/maintenance.flag',
+        'custom_file'   => 'config/messages/503.html',
     ],
 ];
