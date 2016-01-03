@@ -28,7 +28,9 @@ composer require mpalourdio/zf2-maintenance-mode
 
 Add "ZfMaintenanceMode" to your **modules list** in **application.config.php**
 
-Eventually, copy ``` maintenance.config.global.php.dist``` to ````config/autoload/maintenance.config.global.php``` to personalize the message and/or the http status code and/or the path of the flag file.
+Eventually, copy ```maintenance.config.global.php.dist``` to ```config/autoload/maintenance.config.global.php``` to personalize the message and/or the http status code and/or the path of the flag file.  
+
+Instead of the message, you can add an html status page by providing the ```html``` option parameter
 
 Enable maintenance mode
 ==========================
