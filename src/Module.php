@@ -20,6 +20,12 @@ use Zend\Console\Adapter\AdapterInterface as Console;
 
 class Module implements InitProviderInterface, ConfigProviderInterface
 {
+
+    /**
+     * @var array
+     */
+    private $userConfig;
+
     /**
      * @param  ModuleManagerInterface $moduleManager
      * @throws \Exception
@@ -62,12 +68,26 @@ class Module implements InitProviderInterface, ConfigProviderInterface
                 function (MvcEvent $mvcEvent) use ($userConfig) {
                     $response = $mvcEvent->getResponse();
                     $response->setStatusCode($userConfig['maintenance']['status_code']);
-                    $response->setContent('<h1>' . $userConfig['maintenance']['message'] . '</h1>');
+                    $response->setContent($this->getResponseContent());
                     $mvcEvent->stopPropagation(true);
                 },
                 PHP_INT_MAX
             );
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getResponseContent()
+    {
+        $userConfig = $this->getUserConfig();
+
+        if(isset($userConfig['maintenance']['html']) && is_readable($userConfig['maintenance']['html'])) {
+            return file_get_contents($userConfig['maintenance']['html']);
+        }
+        $message = isset($userConfig['maintenance']['message']) ? $userConfig['maintenance']['message'] : 'Service unavailable';
+        return sprintf('<h1>%s</h1>', $message);
     }
 
     /**
@@ -83,14 +103,18 @@ class Module implements InitProviderInterface, ConfigProviderInterface
      */
     public function getUserConfig()
     {
-        $globPaths   = glob('config/autoload/maintenance{,*.}{global,local}.php', GLOB_BRACE);
-        $globCounter = count($globPaths);
+        if (!$this->userConfig) {
+            $globPaths   = glob('config/autoload/maintenance{,*.}{global,local}.php', GLOB_BRACE);
+            $globCounter = count($globPaths);
 
-        if ($globCounter > 0) {
-            return require $globPaths[$globCounter - 1];
+            $configFile = __DIR__ . '/../config/maintenance.config.global.php.dist';
+            if ($globCounter > 0) {
+                $configFile = $globPaths[$globCounter - 1];
+            }
+            $this->userConfig = require $configFile;
         }
 
-        return require __DIR__ . '/../config/maintenance.config.global.php.dist';
+        return $this->userConfig;
     }
 
     /**
