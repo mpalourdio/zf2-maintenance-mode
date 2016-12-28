@@ -1,6 +1,7 @@
-[![PHP 5.5+][ico-engine]][lang]
+[![PHP 5.6+][ico-engine]][lang]
 [![MIT Licensed][ico-license]][license]
-[ico-engine]: http://img.shields.io/badge/php-5.5+-8892BF.svg
+
+[ico-engine]: http://img.shields.io/badge/php-5.6+-8892BF.svg
 [lang]: http://php.net
 [ico-license]: http://img.shields.io/packagist/l/adlawson/veval.svg
 [license]: LICENSE
@@ -16,7 +17,7 @@ It mainly short-circuits the module manager during modules initialization and sh
 Requirements
 ============
   
-PHP 5.5+
+PHP 5.6+
 
 Installation
 ============
