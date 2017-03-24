@@ -1,33 +1,33 @@
 {
-    "name":        "mpalourdio/zf2-maintenance-mode",
+    "name": "mpalourdio/zf2-maintenance-mode",
     "description": "ZF2 maintenance mode module",
-    "license":     "MIT",
-    "keywords":    [
+    "license": "MIT",
+    "keywords": [
         "framework",
         "zf2",
         "maintenance"
     ],
-    "homepage":    "https://github.com/mpalourdio/zf2-maintenance-mode",
-    "authors":     [
+    "homepage": "https://github.com/mpalourdio/zf2-maintenance-mode",
+    "authors": [
         {
-            "name":     "@mpalourdio",
-            "email":    "mpalourdio@gmail.com",
+            "name": "@mpalourdio",
+            "email": "mpalourdio@gmail.com",
             "homepage": "https://github.com/mpalourdio"
         }
     ],
-    "require":     {
-        "php":                              ">=5.5",
-        "zendframework/zend-console":       "~2.3",
-        "zendframework/zend-mvc":           "~2.3",
-        "zendframework/zend-modulemanager": "~2.3",
-        "zendframework/zend-http":          "~2.3"
+    "require": {
+        "php": "^7.0",
+        "zendframework/zend-console": "^2.3",
+        "zendframework/zend-mvc": "^2.3",
+        "zendframework/zend-modulemanager": "^2.3",
+        "zendframework/zend-http": "^2.3"
     },
-    "autoload":    {
+    "autoload": {
         "psr-4": {
             "ZfMaintenanceMode\\": "src/"
         }
     },
-    "extra":       {
+    "extra": {
         "branch-alias": {
             "dev-master": "0.3.x-dev"
         }
