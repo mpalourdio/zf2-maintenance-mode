@@ -68,7 +68,11 @@ class Module implements InitProviderInterface, ConfigProviderInterface
                 function (MvcEvent $mvcEvent) use ($userConfig) {
                     $response = $mvcEvent->getResponse();
                     $response->setStatusCode($userConfig['maintenance']['status_code']);
-                    $response->setContent($this->getResponseContent());
+                    if($userConfig['maintenance']['custom_file']) {
+                         $response->setContent( file_get_contents($userConfig['maintenance']['custom_file']));
+                    } else {
+                        $response->setContent('<h1>' . $userConfig['maintenance']['message'] . '</h1>');
+                    }
                     $mvcEvent->stopPropagation(true);
                 },
                 PHP_INT_MAX

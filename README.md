@@ -33,6 +33,8 @@ Eventually, copy ```maintenance.config.global.php.dist``` to ```config/autoload/
 
 Instead of the message, you can add an html status page by providing the ```html``` option parameter.
 
+When there is a 'custom_file' config, the file will be displayed instead of the message.
+
 Enable maintenance mode
 ==========================
 
